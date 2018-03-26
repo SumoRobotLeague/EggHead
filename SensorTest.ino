@@ -18,8 +18,8 @@ void setup() {
 	Serial.begin(9600);
 
 	// IR sensors
-	pinMode(leftSensor,  INPUT);
-	pinMode(rightSensor, INPUT);
+	pinMode(leftSensor,  INPUT_PULLUP);
+	pinMode(rightSensor, INPUT_PULLUP);
 	pinMode(IREmitter,   OUTPUT);
 
 	// Turn on our IR Emitter
@@ -32,6 +32,7 @@ void loop() {
 
 	int avg = ( leftIR + rightIR ) / 2;
 
-	Serial.print("Threshold to use: ");
+	Serial.print("Threshold to use: "
+);
 	Serial.println(avg);
 }
