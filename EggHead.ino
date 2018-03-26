@@ -54,6 +54,7 @@ int state       = 0; // 0 = idle, 1 = running, 2 = found egg
 // competition configuration variables
 int turnDirection      = 1; // 1 = left, 2 = right
 unsigned long turnTime = 0; // holds the return from millis()
+int searchTime         = 2000;
 
 void setup() {
 	Serial.begin(9600);
@@ -114,10 +115,10 @@ void hunt() {
   int leftIR   = analogRead(leftSensor);
   int rightIR  = analogRead(rightSensor);
 
-  if ( leftIR < abortThreshold || rightIR < abortThreshold ) {
+  if ( leftIR < SurfaceThreshold || rightIR < surfaceThreshold ) {
 	// if we have detected a ring border, abort!
 	abortBackup();
-  } else if ( distance < attackDistance ) {
+  } else if ( distance < eggDistance ) {
 	// We have detected an enemy. Attack!
 	goToEgg();
   } else {
@@ -189,40 +190,40 @@ void playSong() {
 /**********************/
 // Note-playing buzzer helper function.
 void playNote(int note, int duration, int rest) {
-  tone(buzzer, note, duration);
-  delay(rest);
+	tone(buzzer, note, duration);
+	delay(rest);
 }
 
 // Helper function to manage our ultrasonic sensor.
 long ping() {
-  long duration;
-  digitalWrite(pingPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(pingPin, LOW);
-  duration = pulseIn(echoPin, HIGH, 5500);  //setting the timeout to 5500 is helpful but will return 0 whenever pulseIn() times out
-  if (duration == 0) {
-	duration = 5500;  //here we change the 0 value to the actual timeout limit
-  }
-  return duration;
+	long duration;
+	digitalWrite(pingPin, LOW);
+	delayMicroseconds(2);
+	digitalWrite(pingPin, HIGH);
+	delayMicroseconds(10);
+	digitalWrite(pingPin, LOW);
+	duration = pulseIn(echoPin, HIGH, 5500);  //setting the timeout to 5500 is helpful but will return 0 whenever pulseIn() times out
+	if (duration == 0) {
+		duration = 5500;  //here we change the 0 value to the actual timeout limit
+	}
+	return duration;
 }
 
 // Helper function to return the distance to an object
 // detected by the ultrasonic sensor in centimeters.
 long msToCm(long microseconds) {
-  return microseconds / 29 / 2;
+	return microseconds / 29 / 2;
 }
 
 // Simple blink function called in loop() whenever a state
 // change is made by a user button press.
 void blink(int blinks) {
-  for ( int i = 0; i <= blinks; i++ ) {
-	digitalWrite(led, HIGH);
-	delay(500);
-	digitalWrite(led, LOW);
-	delay(500);
-  }
+	for ( int i = 0; i <= blinks; i++ ) {
+		digitalWrite(led, HIGH);
+		delay(500);
+		digitalWrite(led, LOW);
+		delay(500);
+	}
 }
 /*********************************************************************************************************************
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
