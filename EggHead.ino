@@ -10,7 +10,7 @@ The MRK-2 robot kit is available from http://www.SumoRobotLeague.com
 ********************************************************************/
 
 // To calculate the surface threshold you need to use, run
-// the code found in SensorCalibration.ino on your robot with the
+// the code found in SensorTest.ino on your robot with the
 // Serial Monitor open. Whatever number it spits out, you'll need to pick
 // a lower number and put it here. If it says something like "456", you'll want
 // to pick a number like 300. Take a look at the output of the test code
