@@ -121,12 +121,12 @@ void hunt() {
   } else if ( distance < eggDistance ) {
 	// We have detected an enemy. Attack!
 
-	id ( distance < 3 ) {
+	if ( distance < 3 ) {
 		playSong();
 	} else {
 		goToEgg();
 	}
-	
+
   } else {
 	// We don't see an enemy, search until we find one.
 	search();
