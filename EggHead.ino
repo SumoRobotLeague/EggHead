@@ -1,5 +1,5 @@
 /********************************************************************
-EggHeadSurface Calibrator
+EggHead - Easter Egg Hunting Robot
 
 Author - Eric Ryan Harrison <me@ericharrison.info>
 http://github.com/SumoRobotLeague/EggJead/ contains the complete robot.
