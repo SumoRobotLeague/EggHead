@@ -120,7 +120,13 @@ void hunt() {
 	abortBackup();
   } else if ( distance < eggDistance ) {
 	// We have detected an enemy. Attack!
-	goToEgg();
+
+	id ( distance < 3 ) {
+		playSong();
+	} else {
+		goToEgg();
+	}
+	
   } else {
 	// We don't see an enemy, search until we find one.
 	search();
@@ -145,9 +151,9 @@ void search() {
 	// start our turn, 1 = left, 2 = right
 	if ( turnDirection == 1 ) {
 		motor.left(255);
-		motor.right(-255);
+		motor.right(-155);
 	} else {
-		motor.left(-255);
+		motor.left(-155);
 		motor.right(255);
 	}
 }
@@ -155,6 +161,8 @@ void search() {
 void goToEgg() {
 	motor.left(255);
 	motor.right(255);
+
+
 }
 
 // The abortBackup() function is an interrupting function that
