@@ -115,7 +115,7 @@ void hunt() {
   int leftIR   = analogRead(leftSensor);
   int rightIR  = analogRead(rightSensor);
 
-  if ( leftIR < SurfaceThreshold || rightIR < surfaceThreshold ) {
+  if ( leftIR < SurfaceThreshold || rightIR < SurfaceThreshold ) {
 	// if we have detected a ring border, abort!
 	abortBackup();
   } else if ( distance < eggDistance ) {
