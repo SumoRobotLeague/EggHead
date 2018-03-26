@@ -30,8 +30,8 @@ void loop() {
 	int leftIR   = analogRead(leftSensor);
 	int rightIR  = analogRead(rightSensor);
 
-	Serial.print("Left: ");
-	Serial.print(leftIR);
-	Serial.print(", Right: ");
-	Serial.println(rightIR);
+	int avg = ( leftIR + rightIR ) / 2;
+
+	Serial.print("Threshold to use: ");
+	Serial.println(avg);
 }
