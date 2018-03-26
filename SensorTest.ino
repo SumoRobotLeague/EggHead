@@ -32,7 +32,7 @@ void loop() {
 
 	int avg = ( leftIR + rightIR ) / 2;
 
-	Serial.print("Threshold to use: "
+	Serial.print("Threshold to use: ");
 );
 	Serial.println(avg);
 }
