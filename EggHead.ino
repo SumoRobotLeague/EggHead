@@ -109,28 +109,28 @@ void loop() {
 }
 
 void hunt() {
-  // read our sensor values to determine what we
-  // need our robot to do.
-  int distance = msToCm( ping() );
-  int leftIR   = analogRead(leftSensor);
-  int rightIR  = analogRead(rightSensor);
+	// read our sensor values to determine what we
+	// need our robot to do.
+	int distance = msToCm( ping() );
+	int leftIR   = analogRead(leftSensor);
+	int rightIR  = analogRead(rightSensor);
 
-  if ( leftIR < SurfaceThreshold || rightIR < SurfaceThreshold ) {
-	// if we have detected a ring border, abort!
-	abortBackup();
-  } else if ( distance < eggDistance ) {
-	// We have detected an enemy. Attack!
+	if ( leftIR < SurfaceThreshold || rightIR < SurfaceThreshold ) {
+		// if we have detected a ring border, abort!
+		abortBackup();
+	} else if ( distance < eggDistance ) {
+		// We have detected an enemy. Attack!
 
-	if ( distance < 3 ) {
-		playSong();
+		if ( distance < 5 ) {
+			playSong();
+		} else {
+			goToEgg();
+		}
+
 	} else {
-		goToEgg();
+		// We don't see an enemy, search until we find one.
+		search();
 	}
-
-  } else {
-	// We don't see an enemy, search until we find one.
-	search();
-  }
 }
 
 // This function is a simple search algorithm that
@@ -150,19 +150,18 @@ void search() {
 
 	// start our turn, 1 = left, 2 = right
 	if ( turnDirection == 1 ) {
-		motor.left(255);
-		motor.right(-155);
+		motor.left(200);
+		motor.right(-100);
 	} else {
-		motor.left(-155);
-		motor.right(255);
+		motor.left(-100);
+		motor.right(200);
 	}
 }
 
 void goToEgg() {
+	playNote(NOTE_G4, 200, 15);
 	motor.left(255);
 	motor.right(255);
-
-
 }
 
 // The abortBackup() function is an interrupting function that
@@ -177,17 +176,37 @@ void abortBackup() {
 }
 
 void playSong() {
-	playNote(NOTE_G6, 200, 15);
-	delay(200);
-	playNote(NOTE_G5, 200, 15);
-	delay(200);
+	motor.left(0);
+	motor.right(0);
+
 	playNote(NOTE_G4, 200, 15);
 	delay(200);
-	playNote(NOTE_G3, 200, 15);
+	playNote(NOTE_F4, 200, 15);
 	delay(200);
-	playNote(NOTE_G2, 200, 15);
+	playNote(NOTE_E4, 200, 15);
 	delay(200);
-	playNote(NOTE_G1, 200, 15);
+	playNote(NOTE_D4, 200, 15);
+	delay(200);
+	playNote(NOTE_C4, 200, 15);
+	delay(200);
+	playNote(NOTE_B4, 200, 15);
+	delay(200);
+	playNote(NOTE_A4, 200, 15);
+	delay(200);
+
+	playNote(NOTE_A4, 200, 15);
+	delay(200);
+	playNote(NOTE_B4, 200, 15);
+	delay(200);
+	playNote(NOTE_C4, 200, 15);
+	delay(200);
+	playNote(NOTE_D4, 200, 15);
+	delay(200);
+	playNote(NOTE_E4, 200, 15);
+	delay(200);
+	playNote(NOTE_F4, 200, 15);
+	delay(200);
+	playNote(NOTE_G4, 200, 15);
 	delay(200);
 
 	state = 0;
